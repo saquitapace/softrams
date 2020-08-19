@@ -1,0 +1,17 @@
+#activeStatus {
+    margin-right: 10px;
+}
+
+.modal-wrapper {
+    position: absolute;
+    background-color: wheat;
+    height: 40vh;
+    margin-left: 30vw;
+    width: calc(100% - 60vw);
+}
+
+/* Add a pointer on hover */
+
+.back-button {
+    cursor: pointer;
+}

@@ -1,0 +1,94 @@
+<div class="container-fluid col-md-6">
+    <div class="back-button" (click)="modalClose()">back</div>
+    <h3 class="text-center lead">Add Member to Racing Team</h3>
+<!--    <button type="button" class="close" aria-label="Close" (click)="modalClose()">-->
+<!--        <span aria-hidden="true">&times;</span>-->
+<!--    </button>-->
+    <br/>
+    <!--Template Driven Form or Model Driven Form?-->
+    <form #memberForm="ngForm" (ngSubmit)="onSubmit(memberForm.value)">
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="firstName"></label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="firstName"
+                            placeholder="First Name"
+                            name="firstName"
+                            value="{{memberModel.firstName}}"
+                            ngModel
+                            (keyup)="onFirstName($event)"
+                    />
+
+
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName"></label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="lastName"
+                            placeholder="Last Name"
+                            name="lastName"
+                            value="{{memberModel.lastName}}"
+                            ngModel
+                            (keyup)="onLastName($event)"
+                    />
+
+
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="jobTitle"></label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="jobTitle"
+                            placeholder="Job Title"
+                            name="jobTitle"
+                            value="{{memberModel.jobTitle}}"
+                            ngModel
+                            (keyup)="onJobTitle($event)"
+                    />
+                </div>
+                <!--We may have to make a service call to get this list-->
+                <div class="col-md-6">
+                     <label for="team"></label>
+                    <select id="team" name='team' class="custom-select"
+                            (change)="onTeam($event)">
+                        <!--          <option selected> Select a Team</option>-->
+                        <option *ngFor="let team2 of teams"
+                                [selected]="team2.teamName===memberModel.team"
+                                [ngValue]="team2.teamName">{{ team2.teamName }}</option>
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group col-md-6">
+                <div class="row">
+                    <label id="activeStatus" class="md-check lead">
+                        <input type="radio" name="status"
+                               [checked]="memberModel.status == 'Active'"
+                               (change)="onActive($event)"/> Active
+                    </label>
+                    <label class="md-check lead">
+                        <input type="radio" name="status"
+                               [checked]="memberModel.status == 'Inactive'"
+                               (change)="onInactive($event)"/>
+                        Inactive
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--Disable if form is invalid-->
+        <button type="submit" class="btn btn-primary pull-right">
+            Save Member
+        </button>
+    </form>
+</div>
+
+

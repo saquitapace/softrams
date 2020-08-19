@@ -1,0 +1,294 @@
+<!--<app-member-details (closeModalInput)="modalClose()" [showModal]="showModal"></app-member-details>-->
+<!--&lt;!&ndash;<(closeModalInput)="modalClose()">&ndash;&gt;-->
+
+<div *ngIf="confirmUpdate" class="wrapper-confirmation">
+  <div class="modal-header customer-model-header">
+    Confirm Update !
+  </div>
+  <div class="modal-body customer-model-body">
+    Do you really want to Update this entry ?
+  </div>
+  <div class="modal-footer customer-model-body">
+    <button type="button" class="btn btn-primary" (click)="closeModel()">
+      No
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary btn-danger"
+      (click)="modalSubmitUpdate()"
+    >
+      Yes
+    </button>
+  </div>
+</div>
+
+<div *ngIf="confirmDelete" class="wrapper-confirmation">
+  <div class="modal-header customer-model-header">
+    Confirm Delete !
+  </div>
+  <div class="modal-body customer-model-body">
+    Do you really want to Delete this entry ?
+  </div>
+  <div class="modal-footer customer-model-body">
+    <button type="button" class="btn btn-primary" (click)="closeModel()">
+      No
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary btn-danger"
+      (click)="deleteMemberById()"
+    >
+      Yes
+    </button>
+  </div>
+</div>
+
+<!--<div id="overlay">-->
+<!--  Hello-->
+<!--</div>-->
+<!-- <div class="modal-custom-container container-fluid" *ngIf="updateState"> -->
+
+<div class="modal-custom-container container-fluid" *ngIf="showModal">
+    <div class="background" (click)="modalClose()"></div>
+  <!--    <div id="overlay">-->
+  <div class="modal-wrapper container-fluid col-md-6">
+    <div class="modal-header">
+      <h4 class="modal-title">Add New Member</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modalClose()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="first-name col-md-6">
+          <label>
+            <input
+              class="form-control first-name-input"
+              placeholder="First Name"
+              (keyup)="onFirstName($event)"
+            />
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>
+            <input
+              class="form-control last-name-input"
+              placeholder="Last Name"
+              (keyup)="onLastName($event)"
+            />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>
+            <input
+              class="form-control job-title-name-input"
+              placeholder="Job Title"
+              (keyup)="onJobTitle($event)"
+            />
+          </label>
+        </div>
+        <div class="col-md-6">
+          <select
+            id="teamAdd"
+            name="team"
+            class="custom-select"
+            (change)="onTeam($event)"
+          >
+            <option
+              *ngFor="let team of teams"
+              [selected]="1"
+              value="{{ team.teamName }}"
+            >
+              {{ team.teamName }}</option
+            >
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <label id="activeStatusAdd" class="md-check lead">
+              <input type="radio" name="status" [checked]="true" (change)="onActive($event)" />
+              Active
+            </label>
+            <label id="inactiveStatusAdd" class="md-check lead">
+              <input type="radio" name="status" (change)="onInactive($event)" />
+              Inactive
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modalClose()">
+        Close
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary pull-right"
+        (click)="modalSubmit()"
+      >
+        Save Member
+      </button>
+    </div>
+  </div>
+  <!--    </div>-->
+</div>
+
+<div class="modal-custom-container container-fluid" *ngIf="updateState">
+    <div class="background" (click)="modalClose()"></div>
+  <div class="modal-wrapper">
+    <div class="modal-header">
+      <h4 class="modal-title">Update Member Details</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modalClose()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="first-name col-md-6">
+          <label>
+            <input
+              class="form-control first-name-input"
+              [value]="memberData.firstName"
+              (keyup)="onFirstName($event)"
+            />
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>
+            <input
+              class="form-control last-name-input"
+              [value]="memberData.lastName"
+              (keyup)="onLastName($event)"
+            />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>
+            <input
+              class="form-control job-title-name-input"
+              [value]="memberData.jobTitle"
+              (keyup)="onJobTitle($event)"
+            />
+          </label>
+        </div>
+        <div class="col-md-6">
+          <select
+            id="team"
+            name="team"
+            class="custom-select"
+            (change)="onTeam($event)"
+          >
+            <option
+              *ngFor="let team1 of teams"
+              [selected]="team1.teamName == memberData.team"
+              value="{{ team1.teamName }}"
+            >
+              {{ team1.teamName }}</option
+            >
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="modal-radio">
+            <label id="activeStatus">
+              <input
+                type="radio"
+                name="status"
+                [checked]="memberData.status == 'Active'"
+                (change)="onActive($event)"
+              />
+              Active
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="status"
+                [checked]="memberData.status == 'Inactive'"
+                (change)="onInactive($event)"
+              />
+              Inactive
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!--        <p>One fine body&hellip</p>-->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modalClose()">
+        Close
+      </button>
+      <button
+        type="button"
+        class="btn btn-light"
+        (click)="showConfirmDialog(true, false)"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <button
+    id="addMemberButton"
+    class="btn btn-primary pull-right"
+    (click)="goToAddMemberForm()"
+  >
+    Add Member
+  </button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Member ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Job Title</th>
+        <th>Racing Team</th>
+        <th>Status</th>
+        <th>Settings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of members" class="member-row">
+        <td (click)="navigator(member.id)">{{ member?.id }}</td>
+        <td (click)="navigator(member.id)">{{ member?.firstName }}</td>
+        <td (click)="navigator(member.id)">{{ member?.lastName }}</td>
+        <td (click)="navigator(member.id)">{{ member?.jobTitle }}</td>
+        <td (click)="navigator(member.id)">{{ member?.team }}</td>
+        <td (click)="navigator(member.id)">{{ member?.status }}</td>
+        <td>
+          <button
+            class="btn btn-danger pull-right"
+            (click)="showConfirmDialog(false, true, member)"
+          >
+            Delete
+          </button>
+          <button
+            class="btn btn-primary fa-pull-right"
+            (click)="editMemberByID(member.id)"
+          >
+            Update
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

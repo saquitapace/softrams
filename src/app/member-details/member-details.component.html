@@ -1,0 +1,105 @@
+<div class="container-fluid col-md-6">
+  <div class="row">
+    <button
+      type="submit"
+      class="btn btn-primary pull-left"
+      (click)="modalClose()"
+    >
+      back
+    </button>
+  </div>
+  <!-- <button type="submit" class="btn btn-primary pull-left" (click)="modalClose()">back</button> -->
+  <!-- <div class="back-button" (click)="modalClose()">back</div> -->
+  <!--    <button type="button" class="close" aria-label="Close" (click)="modalClose()">-->
+  <!--        <span aria-hidden="true">&times;</span>-->
+  <!--    </button>-->
+  <br />
+  <!--Template Driven Form or Model Driven Form?-->
+  <form #memberForm="ngForm" (ngSubmit)="onSubmit(memberForm.value)">
+    <div class="member-details">
+      <div class="row">
+        <div class="col-xs-12 data-item">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            placeholder="First Name"
+            name="firstName"
+            value="{{ memberModel.firstName }}"
+            ngModel
+            disabled
+            (keyup)="onFirstName($event)"
+          />
+        </div>
+        <div class="col-xs-12 data-item">
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              placeholder="Last Name"
+              name="lastName"
+              value="{{ memberModel.lastName }}"
+              ngModel
+              disabled
+              (keyup)="onLastName($event)"
+            />
+          </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-xs-12 data-item">
+          <label for="jobTitle">Job Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="jobTitle"
+            placeholder="Job Title"
+            name="jobTitle"
+            value="{{ memberModel.jobTitle }}"
+            ngModel
+            disabled
+            (keyup)="onJobTitle($event)"
+          />
+        </div>
+
+        <div class="col-xs-12 data-item">
+            <label for="team">Team</label>
+            <input
+              type="text"
+              class="form-control"
+              id="jobTitle"
+              placeholder="Job Title"
+              name="jobTitle"
+              value="{{ memberModel.team }}"
+              ngModel
+              disabled
+              (keyup)="onJobTitle($event)"
+            />
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 data-item">
+          <label for="team">Status</label>
+          <input
+            type="text"
+            class="form-control"
+            id="jobTitle"
+            placeholder="Job Title"
+            name="jobTitle"
+            value="{{ memberModel.status }}"
+            ngModel
+            disabled
+            (keyup)="onJobTitle($event)"
+          />
+        </div>  
+      </div>
+    </div>
+    <!-- Disable if form is invalid -->
+    <!-- <button type="submit" class="btn btn-primary pull-right">
+            Save Member
+        </button> -->
+  </form>
+</div>

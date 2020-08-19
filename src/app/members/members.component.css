@@ -1,0 +1,96 @@
+#addMemberButton {
+    margin-bottom: 10px;
+}
+
+.customer-model-header {
+    background-color: dimgray;
+}
+
+.customer-model-body {
+    background-color: gainsboro;
+}
+
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: dimgray;
+    /*background-color: rgba(0, 0, 0, 0.5); !* Black background with opacity *!*/
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer;
+}
+
+.wrapper-confirmation {
+    position: absolute;
+    background-color: gainsboro;
+    height: 22vh;
+    margin-left: 30vw;
+    width: calc(100% - 52vw);
+}
+
+.modal-radio{
+    display: flex;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+.modal-custom-container {
+    position: fixed;
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+}
+
+.modal-custom-container .background {
+    position: absolute;
+    display: block;
+    background-color: #888;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+}
+
+.modal-wrapper {
+    width: 500px;
+    background: #fff;
+    margin: 0 auto;
+    margin-top: 25vh;
+    z-index: 10;
+    position: relative;
+}
+
+/* .first-name label{
+    width: 100%;
+} */
+
+.status {
+    margin-left: 1vw;
+}
+
+.member-row {
+    cursor: pointer;
+}
+
+.member-row:hover{
+    background-color: #eee;
+}
